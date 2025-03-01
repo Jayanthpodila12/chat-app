@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatapp-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatapp-be
+  template:
+    metadata:
+      labels:
+        app: chatapp-be
+    spec:
+      containers:
+        - name: backend-container
+          image: jayanthpodila/chatapp:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: backend-config-map
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+
+--------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatapp-be-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+  selector:
+    app: chatapp-be
+
