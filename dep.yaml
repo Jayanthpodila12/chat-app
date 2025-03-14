@@ -78,7 +78,7 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: be-image:latest
+          image: be-image
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
