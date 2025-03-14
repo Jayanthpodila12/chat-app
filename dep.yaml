@@ -5,7 +5,7 @@ metadata:
 data:
   password: Y2hhdC1hcHAxMjM=
 
--------------------------------------
+
 
 apiVersion: apps/v1
 kind: Deployment
